@@ -21,10 +21,10 @@ def driver(request):
 
     if request.param == 'firefox':
         browser = webdriver.Firefox()
-        browser.get(urls.MAIN_PAGE)
+        browser.get(urls.BASE_PAGE)
     elif request.param == 'chrome':
         browser = webdriver.Chrome()
-        browser.get(urls.MAIN_PAGE)
+        browser.get(urls.BASE_PAGE)
     yield browser
     browser.quit()
 
@@ -66,17 +66,18 @@ def registration_user(driver):
     name = Data.DATA_USER_NAME
     registration_user_body = {"email": email, "password": password,
                               "name": name}
-    response_reg = requests.post(urls.MAIN_PAGE + urls.REGISTRATION_USER_ENDPOINT, json=registration_user_body)
+    response_reg = requests.post(f'{urls.BASE_PAGE}{urls.REGISTRATION_USER_ENDPOINT}',
+                                 json=registration_user_body)
     token = response_reg.json()["accessToken"]
     yield [token, email, password, name]
-    requests.delete(urls.MAIN_PAGE + urls.DELETE_USER_ENDPOINT, headers={'Authorization': token})
+    requests.delete(f'{urls.BASE_PAGE}{urls.DELETE_USER_ENDPOINT}', headers={'Authorization': token})
 
 
 @pytest.fixture()
 def personal_account(driver, registration_user, main_page, entrance_page):
-    main_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
+    main_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
     main_page.click_button_personal_account()
-    entrance_page.wait_element_visibility_of_element(EntrancePageLocators.TITLE_ENTRANCE)
+    entrance_page.wait_element_visibility_of_element(10, EntrancePageLocators.TITLE_ENTRANCE)
     entrance_page.enter_email_entrance_page(registration_user[1])
     entrance_page.enter_password_entrance_page(registration_user[2])
     entrance_page.click_button_entrance()

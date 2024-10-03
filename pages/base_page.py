@@ -24,20 +24,24 @@ class BasePage:
         self.find_element(locator).click()
 
     @allure.step('Ожидание наличия элемента на странице')
-    def wait_element_presence_of_element_located(self, locator):
-        WebDriverWait(self.driver, 3).until(expected_conditions.presence_of_element_located(locator))
+    def wait_element_presence_of_element_located(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until(expected_conditions.presence_of_element_located(locator))
 
     @allure.step('Ожидание кликабельности элемента')
-    def wait_element_element_to_be_clickable(self, locator):
-        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(locator))
+    def wait_element_element_to_be_clickable(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until(expected_conditions.element_to_be_clickable(locator))
 
     @allure.step('Наличие элемента на странице')
-    def wait_element_visibility_of_element(self, locator):
-        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
+    def wait_element_visibility_of_element(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until(expected_conditions.visibility_of_element_located(locator))
 
     @allure.step('Ожидание исчезновения элемента')
-    def wait_element_invisibility_of_element(self, locator):
-        WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element_located(locator))
+    def wait_element_invisibility_of_element(self, timeout, locator):
+        WebDriverWait(self.driver, timeout).until(expected_conditions.invisibility_of_element_located(locator))
+
+    @allure.step('Неявное ожидание')
+    def wait(self, locator, text):
+        WebDriverWait(self.driver, 10).until(expected_conditions.text_to_be_present_in_element(locator, text))
 
     @allure.step('Получение текста элемента')
     def get_text(self, locator):

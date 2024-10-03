@@ -9,4 +9,5 @@ class OrderFeedLocators:
     ORDER_FEED = (By.XPATH, ".//ul[contains(@class,'OrderFeed_list')]//p[contains(text(), '#')]")
     SUCCESSFULLY_ALL_TIME = (By.XPATH, ".//div[2]/p[2][contains (@class, 'OrderFeed')]")
     SUCCESSFULLY_TODAY_TIME = (By.XPATH, ".//div[3]/p[2][contains (@class, 'OrderFeed')]")
-
+    ORDER_ON_LIST = (By.XPATH, './/div[contains (@class, "StatusBox")]/ul[contains (@class, "ListReady")]/'
+                               'li[contains (@text, "")]')

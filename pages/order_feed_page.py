@@ -8,8 +8,8 @@ from pages.base_page import BasePage
 class OrderFeedPage(BasePage):
     @allure.step('Открываем страницу ленты заказов')
     def open_url_order_feed(self):
-        self.open_url(urls.ORDER_FEED)
-        self.wait_element_visibility_of_element(OrderFeedLocators.ORDER_FEED_TITLE)
+        self.open_url(f'{urls.BASE_PAGE}{urls.ENDPOINT_ORDER_FEED}')
+        self.wait_element_visibility_of_element(10, OrderFeedLocators.ORDER_FEED_TITLE)
 
     @allure.step('Нажимаем на кнопку "Конструктор"')
     def click_button_designer(self):

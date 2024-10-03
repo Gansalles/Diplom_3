@@ -9,27 +9,28 @@ class TestPersonalAccount:
 
     @allure.title('Преход по клику на "Личный кабинет"')
     def test_transition_personal_account_by_button(self, main_page, personal_account_page, personal_account):
-        main_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
+        main_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
         main_page.click_button_personal_account()
-        personal_account_page.wait_element_visibility_of_element(PersonalAccountPageLocators.BUTTON_PROFILE)
+        personal_account_page.wait_element_visibility_of_element(10, PersonalAccountPageLocators.BUTTON_PROFILE)
         assert personal_account_page.find_element(PersonalAccountPageLocators.BUTTON_PROFILE).text == "Профиль"
 
     @allure.title('Преход в раздел "История заказов"')
     def test_transition_histore_orders(self, main_page, personal_account_page, personal_account):
-        main_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
-        main_page.wait_element_visibility_of_element(MainPageLocators.BUTTON_PERSONAL_ACCOUNT)
+        main_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
+        main_page.wait_element_visibility_of_element(10, MainPageLocators.BUTTON_PERSONAL_ACCOUNT)
         main_page.click_button_personal_account()
-        personal_account_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
+        personal_account_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
         personal_account_page.transition_to_history_order()
-        personal_account_page.wait_element_visibility_of_element(
-            PersonalAccountPageLocators.BUTTON_HISTORY_ORDERS_ACTIVE)
+        personal_account_page.wait_element_visibility_of_element(10,
+                                                                 PersonalAccountPageLocators.
+                                                                 BUTTON_HISTORY_ORDERS_ACTIVE)
         assert personal_account_page.find_element(PersonalAccountPageLocators.BUTTON_HISTORY_ORDERS_ACTIVE)
 
     @allure.title('Выход из аккаунта')
     def test_exit_account(self, main_page, personal_account_page, entrance_page, personal_account):
-        main_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
+        main_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
         main_page.click_button_personal_account()
-        personal_account_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT_ORDER)
+        personal_account_page.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
         personal_account_page.click_button_exit_account()
-        entrance_page.wait_element_invisibility_of_element(MainPageLocators.ELEMENT_ORDER)
+        entrance_page.wait(EntrancePageLocators.TITLE_ENTRANCE, 'Вход')
         assert entrance_page.find_element(EntrancePageLocators.TITLE_ENTRANCE)

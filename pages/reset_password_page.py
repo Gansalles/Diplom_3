@@ -8,8 +8,6 @@ class ResetPasswordPage(BasePage):
 
     @allure.step('Клик по кнопке показать/скрыть пароль')
     def click_button_show_and_hide_password(self):
-        self.wait_element_visibility_of_element(ResetPasswordPageLocators.BUTTON_SHOW_AND_HIDE_PASSWORD)
-
         self.click_element(ResetPasswordPageLocators.BUTTON_SHOW_AND_HIDE_PASSWORD)
 
     @allure.step('Проверим, что поле  активно')

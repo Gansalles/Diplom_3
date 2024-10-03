@@ -8,9 +8,9 @@ from locators.main_page_locators import MainPageLocators
 class EntrancePage(BasePage):
     @allure.step('Открываем страницу входа в аккаунт')
     def open_entrance_page(self):
-        self.open_url(urls.ENTRANCE_PAGE)
-        self.wait_element_invisibility_of_element(MainPageLocators.ELEMENT)
-        self.wait_element_visibility_of_element(EntrancePageLocators.TITLE_ENTRANCE)
+        self.open_url(f'{urls.BASE_PAGE}{urls.ENDPOINT_ENTRANCE_PAGE}')
+        self.wait_element_invisibility_of_element(10, MainPageLocators.ELEMENT)
+        self.wait_element_visibility_of_element(10, EntrancePageLocators.TITLE_ENTRANCE)
 
     @allure.step('Заполняем поле email')
     def enter_email_entrance_page(self, email):
